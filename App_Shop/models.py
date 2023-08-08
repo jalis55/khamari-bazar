@@ -9,16 +9,17 @@ class ProductCategory(models.Model):
     
 
 class Products(models.Model):
-    product_st=(('1','available'),
-                    ('2','out of stock'),
-                    ('3','top selling'))
+    product_st=(
+        ('available','available'),
+                    ('out of stock','out of stock'),
+                    ('top selling','top selling')
+                )
     unit_st=(
-        ('1','kg'),
-        ('2','pcs'),
-        ('3','dozon'),
-        ('4','litter'),
-
-    )
+        ('kg','kg'),
+        ('pcs','pcs'),
+        ('dozon','dozon'),
+        ('litter','litter'),
+        )
     product_category=models.ForeignKey(ProductCategory,on_delete=models.CASCADE,related_name='product_category')
     product_name=models.CharField(max_length=200,blank=False,null=False)
     product_description=models.CharField(max_length=300,blank=True,null=True)
