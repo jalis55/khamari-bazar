@@ -103,7 +103,7 @@
             <div class="side">
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
-                    <!-- <ul class="cart-list">
+                    <ul class="cart-list">
                         <li>
                             <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
                             <h6><a href="#">Delica omtantur </a></h6>
@@ -119,11 +119,15 @@
                             <h6><a href="#">Agam facilisis</a></h6>
                             <p>1x - <span class="price">$40.00</span></p>
                         </li>
+
+                    </ul>
+                    <ul>
                         <li class="total">
                             <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: $180.00</span>
                         </li>
-                    </ul> -->
+
+                    </ul>
                 </li>
             </div>
             <!-- End Side Menu -->
@@ -233,10 +237,12 @@
                             </div>
                             <img src="{{item.product_image.url}}" class="img-fluid" alt="Image">
                             <!-- <img src={% static "images/chicken_with_skin.jpeg" %} class="img-fluid" alt="Image"> -->
+                            {% if item.product_status != 'out of stock' %}
                             <div class="mask-icon">
-
-                                <a class="cart" href="#">Add to Cart</a>
+                                <a class="cart" href="#" disable>Add to Cart </a>
                             </div>
+
+                            {% endif %}
                         </div>
                         <div class="why-text">
                             <h4>{{item.product_name}}</h4>
@@ -273,10 +279,12 @@
                                 <p class="sale">{{item.product_status}}</p>
                             </div>
                             <img src="{{item.product_image.url}}" class="img-fluid" alt="Image">
+                            {% if item.product_status != 'out of stock' %}
                             <div class="mask-icon">
-
-                                <a class="cart" href="#">Add to Cart</a>
+                                <a class="cart" href="#" disable>Add to Cart </a>
                             </div>
+
+                            {% endif %}
                         </div>
                         <div class="why-text">
                             <h4>{{item.product_name}}</h4>
@@ -311,10 +319,12 @@
                                 <p class="sale">{{item.product_status}}</p>
                             </div>
                             <img src={{item.product_image.url}} class="img-fluid" alt="Image">
+                            {% if item.product_status != 'out of stock' %}
                             <div class="mask-icon">
-
-                                <a class="cart" href="#">Add to Cart</a>
+                                <a class="cart" href="#" disable>Add to Cart </a>
                             </div>
+
+                            {% endif %}
                         </div>
                         <div class="why-text">
                             <h4>{{item.product_name}}</h4>
@@ -350,10 +360,12 @@
                                 <p class="sale">{{item.product_status}}</p>
                             </div>
                             <img src={{item.product_image.url}} class="img-fluid" alt="Image">
+                            {% if item.product_status != 'out of stock' %}
                             <div class="mask-icon">
-
-                                <a class="cart" href="#">Add to Cart</a>
+                                <a class="cart" href="#" disable>Add to Cart </a>
                             </div>
+
+                            {% endif %}
                         </div>
                         <div class="why-text">
                             <h4>{{item.product_name}}</h4>
