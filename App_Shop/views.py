@@ -16,4 +16,4 @@ def home(request):
         "mutton_items":mutton_items,
         "other_items":other_items
         }
-    return render(request,'index.html',context=context)
+    return render(request,'App_Shop/home.html',context=context)

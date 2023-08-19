@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block body_content %}
+<!-- Start Slider -->
+<div id="slides-shop" class="cover-slides">
+    <ul class="slides-container">
+        <li class="text-center">
+            <img src={% static "images/beef.jpg" %} alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="m-b-20"><strong>Welcome To <br> Khamari Bazar</strong></h1>
+                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends
+                            to see any changes in performance over time.</p>
+                        <!-- <p><a class="btn hvr-hover" href="#">Shop New</a></p> -->
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="text-center">
+            <img src={% static "images/chicken.jpg" %} alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="m-b-20"><strong>Welcome To <br> Khamari Bazar</strong></h1>
+                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends
+                            to see any changes in performance over time.</p>
+                        <!-- <p><a class="btn hvr-hover" href="#">Shop New</a></p> -->
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="text-center">
+            <img src={% static "images/egg.jpg" %} alt="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="m-b-20"><strong>Welcome To <br> Khamari Bazar</strong></h1>
+                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends
+                            to see any changes in performance over time.</p>
+                        <!-- <p><a class="btn hvr-hover" href="#">Shop New</a></p> -->
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="slides-navigation">
+        <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+        <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+    </div>
+</div>
+<!-- End Slider -->
+
+<!-- Start Products  -->
+<div class="products-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1>Our Products</h1>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="font-size: 2rem; font-weight: bold;">Chicken</p>
+                    <div class="button-group filter-button-group">
+
+                        <!-- <button><a style="color: white;" href="#">All</a></button> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            {% for item in chicken_items %}
+
+            <div class="col-lg-3 col-md-6 special-grid best-seller">
+                <div data-id={{item.id}} class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb">
+                            <p class="sale">{{item.product_status}}</p>
+                        </div>
+                        <img src="{{item.product_image.url}}" class="img-fluid" alt="Image">
+                        <!-- <img src={% static "images/chicken_with_skin.jpeg" %} class="img-fluid" alt="Image"> -->
+                        {% if item.product_status != 'out of stock' %}
+                        <div class="mask-icon">
+                            <a class="cart" href="#" disable>Add to Cart </a>
+                        </div>
+
+                        {% endif %}
+                    </div>
+                    <div class="why-text">
+                        <h4>{{item.product_name}}</h4>
+                        <h5>&#2547;<span>{{item.product_price}}</span> per {{item.unit_status}}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="font-size: 2rem; font-weight: bold;">BEEF</p>
+                    <div class="button-group filter-button-group">
+
+                        <!-- <button><a style="color: white;" href="#">All</a></button> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            {% for item in beef_items %}
+            <div class="col-lg-3 col-md-6 special-grid best-seller">
+                <div data-id={{item.id}} class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb">
+                            <p class="sale">{{item.product_status}}</p>
+                        </div>
+                        <img src="{{item.product_image.url}}" class="img-fluid" alt="Image">
+                        {% if item.product_status != 'out of stock' %}
+                        <div class="mask-icon">
+                            <a class="cart" href="#" disable>Add to Cart </a>
+                        </div>
+
+                        {% endif %}
+                    </div>
+                    <div class="why-text">
+                        <h4>{{item.product_name}}</h4>
+                        <!-- <h5>&#2547; <span>{{item.product_price}}</span> per {{item.unit_status}}</h5> -->
+                        <h5>&#2547;<span>{{item.product_price}}</span> per {{item.unit_status}}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="font-size: 2rem; font-weight: bold;">MUTTON</p>
+                    <div class="button-group filter-button-group">
+
+                        <!-- <button><a style="color: white;" href="#">All</a></button> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            {% for item in mutton_items %}
+            <div class="col-lg-3 col-md-6 special-grid best-seller">
+                <div data-id={{item.id}} class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb">
+                            <p class="sale">{{item.product_status}}</p>
+                        </div>
+                        <img src={{item.product_image.url}} class="img-fluid" alt="Image">
+                        {% if item.product_status != 'out of stock' %}
+                        <div class="mask-icon">
+                            <a class="cart" href="#" disable>Add to Cart </a>
+                        </div>
+
+                        {% endif %}
+                    </div>
+                    <div class="why-text">
+                        <h4>{{item.product_name}}</h4>
+                        <h5>&#2547;<span>{{item.product_price}}</span> per {{item.unit_status}}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="display: flex; justify-content: space-between; align-items: center;">
+                    <p style="font-size: 2rem; font-weight: bold;">Others</p>
+                    <div class="button-group filter-button-group">
+
+                        <!-- <button><a style="color: white;" href="#">All</a></button> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            {% for item in other_items %}
+            <div class="col-lg-3 col-md-6 special-grid best-seller">
+                <div data-id={{item.id}} class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb">
+                            <p class="sale">{{item.product_status}}</p>
+                        </div>
+                        <img src={{item.product_image.url}} class="img-fluid" alt="Image">
+                        {% if item.product_status != 'out of stock' %}
+                        <div class="mask-icon">
+                            <a class="cart" href="#" disable>Add to Cart </a>
+                        </div>
+
+                        {% endif %}
+                    </div>
+                    <div class="why-text">
+                        <h4>{{item.product_name}}</h4>
+                        <h5>&#2547;<span>{{item.product_price}}</span> per {{item.unit_status}}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
