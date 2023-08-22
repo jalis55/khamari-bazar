@@ -3,9 +3,18 @@ let cart = localStorage.getItem("cart-items") ? JSON.parse(localStorage.getItem(
  :[];
 
 const cartBtn = document.querySelectorAll('.cart');
+// const cartBtn = document.querySelector('#cart')
+
+// const addItem=(e)=>{
+//     console.log(e.target.parentElement.parentElement.parentElement);
+// }
+
+
 
 cartBtn.forEach((btn) => {
+    // console.log(btn)
     btn.addEventListener('click', (e) => {
+        
         e.preventDefault();
         const product = e.target.parentElement.parentElement.parentElement;
         const product_id=product.getAttribute('data-id');
@@ -68,26 +77,39 @@ const updatCartList = (product_id,product_name, product_price, product_quantity,
         liElement.innerHTML = `
         <a href="#" class="photo"><img src="${product_img}" class="cart-thumb" alt="" /></a>
         <h6><a href="#">${product_name}</a></h6>
-        <p id='item_qty' style="font-size:1.5rem;"><span style="color:red;cursor:pointer" id="minus">-</span> ${product_quantity} <span style="color:red;cursor:pointer" id="plus">+</span></p>
+        <p id='item_qty' style="font-size:1.5rem;"><span style="color:red;cursor:pointer" class="minus">-</span>${product_quantity}<span style="color:red;cursor:pointer" class="plus">+</span></p>
         <p id='item_total'>${product_quantity} X <span class="price">${product_price}=${product_quantity*product_price}</span></p>
         `
-
-        /**
-         * `
-        <a href="#" class="photo"><img src="${product_img}" class="cart-thumb" alt="" /></a>
-        <h6><a href="#">${product_name}</a></h6>
-        <p style="font-size:1.5rem;"><span style="color:red;cursor:pointer" id="minus">-</span> 1 <span style="color:red;cursor:pointer" id="plus">+</span></p>
-        <p>${product_quantity} - <span class="price">${product_price}</span></p>
-        `
-         * 
-         */
         cartList.appendChild(liElement);
         // console.log(getTotol());
         getTotol();
 
+
+        const incrementBtn=liElement.querySelector(".plus");
+        const decrementBtn=liElement.querySelector(".minus");
+        // const incrementBtn = event.target
+        
+        
+        
+        incrementBtn.addEventListener('click',(e)=>{
+            let itemQty=e.target.previousSiblingElement;
+            console.log(itemQty);
+            itemQty='test'
+            
+        })
+
+        // decrementBtn.addEventListener('click',(e)=>{
+        //     console.log(e.target.parentElement);
+        // })
+
+
     }
 
 
+
+}
+const incrementQty=()=>{
+    console.log('clicked');
 }
 cart.forEach((item)=>{
     updatCartList(item.product_id,item.product_name,item.product_price,item.product_quantity,item.product_img);
