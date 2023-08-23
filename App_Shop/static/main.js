@@ -44,6 +44,7 @@ cartBtn.forEach((btn) => {
         }
         localStorage.setItem('cart-items', JSON.stringify(cart));
         // console.log(cart);
+        cartNotification()
 
     })
 
@@ -154,8 +155,18 @@ const decrementQty = (e) => {
 
 
 }
+
+const cartNotification=()=>{
+    const notification=document.querySelector('.badge');
+    notification.innerText=cart.length;
+}
+
 cart.forEach((item) => {
     updatCartList(item.product_id, item.product_name, item.product_price, item.product_quantity, item.product_img);
 })
+
+cartNotification();
+
+
 
 
