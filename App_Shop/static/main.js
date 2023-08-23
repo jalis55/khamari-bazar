@@ -158,7 +158,11 @@ const decrementQty = (e) => {
 
 const cartNotification=()=>{
     const notification=document.querySelector('.badge');
-    notification.innerText=cart.length;
+    const cartLen=cart.length;
+    if(cartLen){
+        notification.innerText=cartLen;
+    }
+    
 }
 
 cart.forEach((item) => {
