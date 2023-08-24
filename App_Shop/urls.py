@@ -5,6 +5,7 @@ app_name="App_Shop"
 
 urlpatterns=[
     path('',views.home,name='home'),
+    path('cart',views.cart,name='cart'),
     
     
 ]
