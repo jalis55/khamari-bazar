@@ -3,12 +3,6 @@ let cart = localStorage.getItem("cart-items") ? JSON.parse(localStorage.getItem(
     : [];
 
 const cartBtn = document.querySelectorAll('.cart');
-// const cartBtn = document.querySelector('#cart')
-
-// const addItem=(e)=>{
-//     console.log(e.target.parentElement.parentElement.parentElement);
-// }
-
 
 
 cartBtn.forEach((btn) => {
@@ -84,25 +78,6 @@ const updatCartList = (product_id, product_name, product_price, product_quantity
         cartList.appendChild(liElement);
         // console.log(getTotol());
         getTotol();
-
-
-        const incrementBtn = liElement.querySelector(".plus");
-        const decrementBtn = liElement.querySelector(".minus");
-        // const incrementBtn = event.target
-
-
-
-        // incrementBtn.addEventListener('click',(e)=>{
-        //     const itemParent=e.target.parentElement;
-        //     const itemQty=itemParent.querySelector("b")
-        //     itemQty.innerText=`${product_quantity+1}`
-
-
-        // })
-
-        // decrementBtn.addEventListener('click',(e)=>{
-        //     console.log(e.target.parentElement);
-        // })
 
 
     }
