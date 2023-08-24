@@ -17,3 +17,11 @@ def home(request):
         "other_items":other_items
         }
     return render(request,'App_Shop/home.html',context=context)
+
+def cart(request):
+
+    
+    context={
+
+        }
+    return render(request,'App_Shop/cart.html',context=context)
