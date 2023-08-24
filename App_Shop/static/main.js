@@ -33,11 +33,11 @@ cartBtn.forEach((btn) => {
       const updateItemQty = cartLi.querySelector('#item_qty')
       const updateItemTotal = cartLi.querySelector('#item_total')
       updateItemQty.innerHTML = `<p id='item_qty' style="font-size:1.5rem;"><span style="color:red;cursor:pointer" id="minus">-</span> ${existingItem.product_quantity} <span style="color:red;cursor:pointer" id="plus">+</span></p>`
-      updateItemTotal.innerHTML = `${
-        existingItem.product_quantity
-      } X <span class="price">${existingItem.product_price}=${
-        existingItem.product_quantity * existingItem.product_price
-      }</span>`
+      updateItemTotal.innerHTML = `${existingItem.product_quantity
+        } X <span class="price">${existingItem.product_price}=${existingItem.product_quantity * existingItem.product_price
+        }</span>
+        <button style="color:white;" class="btn btn-default hvr-hover btn-cart" onclick="removeItem(event)">Remove</button>
+        `
       getTotol()
     } else {
       cart.push({
@@ -95,10 +95,9 @@ const updatCartList = (
         <h6><a href="#">${product_name}</a></h6>
         <p id='item_qty' style="font-size:1.5rem;"><span style="color:red;cursor:pointer" class="minus" onclick="decrementQty(event)">-</span> <b>${product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span></p>
         <div class="quantity-container" style="display:flex;justify-content:space-between;align-items:center;">
-        <p id='item_total'>${product_quantity} X <span class="price">${product_price}=${
-      product_quantity * product_price
-    }</span></p>
-        <button style="color:white;" class="btn btn-default hvr-hover btn-cart">Remove</button>
+        <p id='item_total'>${product_quantity} X <span class="price">${product_price}=${product_quantity * product_price
+      }</span></p>
+        <button style="color:white;" class="btn btn-default hvr-hover btn-cart" onclick="removeItem(event)">Remove</button>
         </div>
         `
     cartList.appendChild(liElement)
@@ -132,12 +131,12 @@ const incrementQty = (e) => {
   const itemTotal = plusBtnParent.querySelector('#item_total')
   productDetails.product_quantity += 1
 
-  itemQty.innerHTML = `<span style="color:red;cursor:pointer" class="minus" onclick="decrementQty(event)">-</span> <b>${productDetails.product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span>`
-  itemTotal.innerHTML = `${
-    productDetails.product_quantity
-  } X <span class="price">${productDetails.product_price}=${
-    productDetails.product_quantity * productDetails.product_price
-  }</span>`
+  itemQty.innerHTML = `<span style="color:red;cursor:pointer" class="minus btn" onclick="decrementQty(event)">-</span> <b>${productDetails.product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span>`
+  itemTotal.innerHTML = `${productDetails.product_quantity
+    } X <span class="price">${productDetails.product_price}=${productDetails.product_quantity * productDetails.product_price
+    }</span>
+    
+    `
 
   localStorage.setItem('cart-items', JSON.stringify(cart))
   getTotol()
@@ -157,15 +156,28 @@ const decrementQty = (e) => {
     productDetails.product_quantity -= 1
 
     itemQty.innerHTML = `<span style="color:red;cursor:pointer" class="minus" onclick="decrementQty(event)">-</span> <b>${productDetails.product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span>`
-    itemTotal.innerHTML = `${
-      productDetails.product_quantity
-    } X <span class="price">${productDetails.product_price}=${
-      productDetails.product_quantity * productDetails.product_price
-    }</span>`
+    itemTotal.innerHTML = `${productDetails.product_quantity
+      } X <span class="price">${productDetails.product_price}=${productDetails.product_quantity * productDetails.product_price
+      }</span>
+      
+      `
 
     localStorage.setItem('cart-items', JSON.stringify(cart))
     getTotol()
   }
+}
+
+const removeItem = (e) => {
+  const itemDetails = e.target.parentElement.parentElement;
+  const itemId = itemDetails.getAttribute('data-productId');
+  console.log(itemId);
+  console.log(typeof (itemId));
+
+  cart = cart.filter((item) => { return item.product_id !== itemId })
+  localStorage.setItem('cart-items', JSON.stringify(cart));
+  itemDetails.remove();
+  getTotol();
+  cartNotification();
 }
 
 const cartNotification = () => {
