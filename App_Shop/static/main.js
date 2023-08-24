@@ -184,7 +184,7 @@ const cartNotification = () => {
   const notification = document.querySelector('.badge')
   const cartLen = cart.length
   if (cartLen) {
-    notification.innerText = cartLen
+    notification.innerText = `(${cartLen})`;
   }
 }
 
