@@ -36,7 +36,7 @@ cartBtn.forEach((btn) => {
       updateItemTotal.innerHTML = `${existingItem.product_quantity
         } X <span class="price">${existingItem.product_price}=${existingItem.product_quantity * existingItem.product_price
         }</span>
-        <button style="color:white;" class="btn btn-default hvr-hover btn-cart" onclick="removeItem(event)">Remove</button>
+        
         `
       getTotol()
     } else {
