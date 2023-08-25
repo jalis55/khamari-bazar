@@ -199,3 +199,6 @@ cart.forEach((item) => {
 })
 
 cartNotification()
+
+//cart page
+
