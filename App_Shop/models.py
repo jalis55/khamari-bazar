@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+import uuid
 
 # Create your models here.
 class ProductCategory(models.Model):
@@ -6,6 +8,8 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.category_name
+    class Meta:
+        verbose_name_plural = 'Categories'
     
 
 class Products(models.Model):
@@ -36,6 +40,34 @@ class Products(models.Model):
 
     def __str__(self) -> str:
         return self.product_name
+    class Meta:
+        verbose_name_plural = 'Products'
+    
+class Order(models.Model):
+    order_st=(
+        ('processing','processing'),
+        ('accepted','accepted'),
+        ('deliverd','delivered')
+        )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    
+    id = models.UUIDField(primary_key = True,default = uuid.uuid4,editable = False)
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField()
+    order_status = models.CharField(max_length=100,choices=order_st,default='processing')
+    shipping_address = models.ForeignKey(
+        'ShippingAddress', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+
+
+
+
+    def get_total(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.get_total_item_price()
+
+        return total
     
 class ShippingAddress(models.Model):
     contat_person_phone=models.CharField(max_length=20,null=True,blank=True)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from App_Shop.models import ProductCategory,Products,ShippingAddress
+from App_Shop.models import ProductCategory,Products,ShippingAddress,Order
 # ,Order,OrderItem
 
 # Register your models here.
@@ -15,7 +15,10 @@ class ProductsAdmin(admin.ModelAdmin):
         return format_html('<img src="{}" style="max-width:100px; max-height:100px"/>'.format(obj.product_image.url))
 
 
+class OrderAdmin(admin.ModelAdmin):
+    list_display=['id']
+
 admin.site.register(Products,ProductsAdmin)
 admin.site.register(ShippingAddress)
-# admin.site.register(Order)
+admin.site.register(Order,OrderAdmin)
 # admin.site.register(OrderItem)
