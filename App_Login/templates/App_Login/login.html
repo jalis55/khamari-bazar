@@ -4,18 +4,18 @@
 
 
 <div class="content-section">
+    
     <form method="POST" class="uniForm">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Sign up</legend>
-            {{user_profile_form|crispy }}
-            {{user_form|crispy}}
+            <legend class="border-bottom mb-4">Sign in</legend>
+            {{form|crispy}}
         </fieldset>
 
         By registering, you accept the Terms of Service and Privacy Notice
 
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            <button class="btn btn-outline-info" type="submit">Sign in</button>
         </div>
     </form>
     <div class="border-top pt-3">

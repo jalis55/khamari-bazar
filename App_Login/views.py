@@ -1,4 +1,5 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
+from django.urls import reverse
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.decorators import login_required
 
@@ -6,25 +7,42 @@ from App_Login.forms import ProfileForm,UserForm
 from App_Login.models import Profile,User
 
 from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
+
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from .tokens import account_activation_token
+from .decorators import user_not_authenticated
 
 # Create your views here.
-
+@user_not_authenticated
 def signin(request):
-    user_profile_form=ProfileForm
-    user_form=UserForm
-    context={
-        'user_profile_form':user_profile_form,
-        'user_form':user_form
+    # if request.user.is_authenticated:
+    #     return redirect("App_Shop:home")
+    
+    if request.method == "POST":
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            username=form.cleaned_data.get('username')
+            password=form.cleaned_data.get('password')
 
-    }
-    return render(request,'App_Login/login.html',context=context)
+            user=authenticate(username=username,password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Hello <b>{user}</b>! You have been logged in")
+                return redirect("App_Shop:home")
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error) 
+
+    form = AuthenticationForm()
+
+    return render(request,"App_Login/login.html",context={"form": form})
+    
 
 
 def activate(request, uidb64, token):
@@ -58,12 +76,12 @@ def activate_email(request,user,to_email):
     email = EmailMessage(mail_subject, message, to=[to_email])
     if email.send():
         print("mail sent")
-        messages.success(request, f'Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
-                received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
+        messages.success(request, f"Dear {user}, please go to you email '{to_email}' inbox and click on received activation link to confirm and complete the registration.Note: Check your spam folder.")
     else:
         print('error')
         messages.error(request, f'Problem sending email to {to_email}, check if you typed it correctly.')
 
+@user_not_authenticated
 def signup(request):
     user_profile_form=ProfileForm
     user_form=UserForm
@@ -83,8 +101,14 @@ def signup(request):
             user_profile_form=ProfileForm(request.POST,instance=profile)
             if user_profile_form.is_valid():
                profile= user_profile_form.save()
-
-        
-
+        else:
+            # messages(request,'Something wrong')
+             for error in list(user_form.errors.values()):
+                messages.error(request, error) 
     return render(request,'App_Login/signup.html',context=context)
 
+@login_required
+def logout_user(request):
+    logout(request)
+    messages.warning(request,"You have logged out")
+    return HttpResponseRedirect(reverse('App_Shome:home'))

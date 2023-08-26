@@ -138,7 +138,15 @@
 
 
 
-
+    <div class="alert alert-success" role="alert">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
     {%block body_content %}
     {% endblock %}
 
