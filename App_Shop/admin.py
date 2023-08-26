@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from App_Shop.models import ProductCategory,Products,ShippingAddress,Order
-# ,Order,OrderItem
+from App_Shop.models import ProductCategory,Products,ShippingAddress,Order,OrderItem
 
 # Register your models here.
 
@@ -18,7 +17,10 @@ class ProductsAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display=['id']
 
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display=['order','item','quantity','get_total_item_price']
+
 admin.site.register(Products,ProductsAdmin)
 admin.site.register(ShippingAddress)
 admin.site.register(Order,OrderAdmin)
-# admin.site.register(OrderItem)
+admin.site.register(OrderItem,OrderItemAdmin)
