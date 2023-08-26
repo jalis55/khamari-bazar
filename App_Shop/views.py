@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from App_Shop.models import ProductCategory,Products
+from App_Shop.models import ProductCategory,Products,ShippingAddress
+from App_Shop.forms import ShippingAddressForm
 
 # Create your views here.
 
@@ -25,3 +26,7 @@ def cart(request):
 
         }
     return render(request,'App_Shop/cart.html',context=context)
+
+def shipping(request):
+    form=ShippingAddressForm()
+    return render(request,'App_Shop/shipping.html',context={'form':form})
