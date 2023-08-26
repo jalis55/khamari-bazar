@@ -33,8 +33,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'App_Login',
     'App_Shop',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,6 +127,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # media files
 MEDIA_ROO=[MEDIA_DIR,]
 MEDIA_URL="/media/"
+
+# Emailing settings
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_FROM = 'pythonlessons0@gmail.com'
+# EMAIL_HOST_USER = 'pythonlessons0@gmail.com'
+# EMAIL_HOST_PASSWORD = 'bsvdctbnvaqlszhd'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+
+#MY EMAIL SETTING
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  #Hosted on namecheap Ex: mail.pure.com
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587 #This will be different based on your Host, for Namecheap I use this`
+EMAIL_FROM = 'jalismahamud2055@gmail.com'
+EMAIL_HOST_USER = 'jalismahamud2055@gmail.com' # Ex: info@pure.com
+EMAIL_HOST_PASSWORD ='drquxwygqrsgvhdj'
+
+PASSWORD_RESET_TIMEOUT = 14400
+# import socket
+# socket.getaddrinfo('localhost', 8080)
 
 LOGIN_URL="/"
 
