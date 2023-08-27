@@ -6,7 +6,7 @@
 
 <div class="content-section">
     
-    <form method="POST" class="uniForm">
+    <form method="POST" class="uniForm" action="{% url 'App_Shop:shipping_process' %}">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Place order</legend>

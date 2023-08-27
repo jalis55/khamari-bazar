@@ -47,14 +47,14 @@ class Order(models.Model):
     order_st=(
         ('processing','processing'),
         ('accepted','accepted'),
-        ('deliverd','delivered')
+        ('deliverd','delivered'),
+        ('cancelled','cancelled')
         )
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     
     id = models.UUIDField(primary_key = True,default = uuid.uuid4,editable = False)
-    start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
+    ordered_date = models.DateTimeField(auto_now_add=True)
     order_status = models.CharField(max_length=100,choices=order_st,default='processing')
     shipping_address = models.ForeignKey(
         'ShippingAddress', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
@@ -79,6 +79,7 @@ class OrderItem(models.Model):
         return self.quantity * self.item.product_price
     
 class ShippingAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     contat_person_phone=models.CharField(max_length=20,null=True,blank=True)
     address=models.CharField(max_length=300,null=False,blank=False)
     apartment_no=models.CharField(max_length=10,null=True,blank=True)

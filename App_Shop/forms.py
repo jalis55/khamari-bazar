@@ -7,4 +7,5 @@ class ShippingAddressForm(ModelForm):
     class Meta:
         model=ShippingAddress
         fields='__all__'
+        exclude=('user',)
         
