@@ -58,13 +58,14 @@ class Order(models.Model):
     order_status = models.CharField(max_length=100,choices=order_st,default='processing')
     shipping_address = models.ForeignKey(
         'ShippingAddress', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+    
+    # def __str__(self):
+    #     return self.id
 
     def get_total(self):
-        total = 0
-        for order_item in self.items.all():
-            total += order_item.get_total_item_price()
-
-        return total
+        order_items = self.orderitem_set.all()  # Get all related OrderItem instances
+        total_price = sum(item.get_total_item_price() for item in order_items)
+        return total_price
     
 class OrderItem(models.Model):
 

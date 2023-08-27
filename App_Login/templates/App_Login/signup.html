@@ -4,26 +4,31 @@
 
 
 <div class="content-section">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12">
+            <form method="POST" class="uniForm">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Sign up</legend>
+                    {{user_profile_form|crispy }}
+                    {{user_form|crispy}}
+                </fieldset>
 
-    <form method="POST" class="uniForm">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Sign up</legend>
-            {{user_profile_form|crispy }}
-            {{user_form|crispy}}
-        </fieldset>
+                By registering, you accept the Terms of Service and Privacy Notice
 
-        By registering, you accept the Terms of Service and Privacy Notice
-
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                </div>
+                <div class="border-top">
+                    <p class="text-muted">
+                        Already Have An Account? <a class="ml-2" href="{% url 'App_Login:signin' %}">Sign In</a>
+                    </p>
+                </div>
+            </form>
         </div>
-    </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="{% url 'App_Login:signin' %}">Sign In</a>
-        </small>
     </div>
+
+
 </div>
 
 {% endblock %}

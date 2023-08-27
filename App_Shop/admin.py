@@ -15,7 +15,7 @@ class ProductsAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display=['id']
+    list_display=['id','ordered_date','order_status','get_total']
 
 class OrderItemAdmin(admin.ModelAdmin):
     list_display=['order','item','quantity','get_total_item_price']

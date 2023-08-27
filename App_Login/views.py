@@ -111,4 +111,4 @@ def signup(request):
 def logout_user(request):
     logout(request)
     messages.warning(request,"You have logged out")
-    return HttpResponseRedirect(reverse('App_Shome:home'))
+    return redirect('App_Shop:home')

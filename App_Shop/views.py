@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from App_Shop.models import ProductCategory,Products,ShippingAddress,Order,OrderItem
 from App_Shop.forms import ShippingAddressForm
 from django.contrib import messages
+import json
 # Create your views here.
 
 def home(request):
@@ -33,18 +34,29 @@ def shipping(request):
 
 def shipping_process(request):
     if request.method=='POST':
-        # form=ShippingAddressForm(request=request,data=request.POST)
-        form=ShippingAddressForm(request.POST)
+        shipping_data =json.loads(request.POST.get('shipping_address'))
+        phone=shipping_data.get('phone')
+        address=shipping_data.get('address')
+        city=shipping_data.get('city')
+        zip_code=shipping_data.get('zip_code')
 
-        if form.is_valid():
-            shipping=form.save(commit=False)
-            shipping.user=request.user
-            shipping.save()
-            order=Order(user=request.user,shipping_address=shipping)
-            order.save()
-            messages.success(request,'order placed')
+    
 
-        else:
-            for error in list(form.errors.values()):
-                messages.error(request, error) 
-        return HttpResponse("order placed")
+        products_data_list = json.loads(request.POST.get('product_data'))
+        # some validation
+        shipping_obj=ShippingAddress(user=request.user
+                                     ,contat_person_phone=phone
+                                     ,address=address
+                                     ,city=city
+                                     ,zip_code=zip_code)
+        shipping_obj.save()
+        order_obj=Order(user=request.user,shipping_address=shipping_obj)
+        order_obj.save()
+
+
+        for product in products_data_list:
+            product_obj=Products.objects.get(id=product['id'])
+            order_item_obj=OrderItem(order=order_obj,item=product_obj,quantity=product['qty'])
+            order_item_obj.save()
+
+        return HttpResponse(shipping_data.get('phone'))
