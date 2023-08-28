@@ -66,19 +66,9 @@
                         <li class="nav-item"><a class="nav-link" href="#"><span><i class="fa-solid fa-phone"></i></span>
                                 01740117690</a></li>
                         <li class="nav-item active"><a class="nav-link" href="{% url 'App_Shop:home' %}">Home</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="about.html">About Us <span></span> </a></li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="shop.html">Sidebar Shop</a></li>
-                                <li><a href="shop-detail.html">Shop Detail</a></li>
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li> -->
+                        <!-- <li class="nav-item"><a class="nav-link" href="about.html">About Us <span></span> </a></li> -->
+
+                        <!-- <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li> -->
 
                         {% if not request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'App_Login:signin' %}"><span><i class="fa-regular fa-user"></i></span>
@@ -86,8 +76,14 @@
 
                         
                         {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'App_Login:logout_user' %}"><span><i class="fa-regular fa-user"></i></span>
-                                    Logout</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><span><i class="fa-regular fa-user"></i></span>  {{request.user.profile.fullname}}</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'App_Shop:all_orders' %}">All Orders</a></li>
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="{% url 'App_Login:logout_user' %}">Logout</a></li>
+                            </ul>
+                        </li>
                         {% endif %}
 
                     </ul>

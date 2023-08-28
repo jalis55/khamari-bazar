@@ -76,7 +76,10 @@ def shipping_process(request):
         return response
 
 def all_orders(request):
-    order_obj=Order.objects.all().order_by('-ordered_date')
+    if request.user.is_staff:
+        order_obj=Order.objects.all().order_by('-ordered_date')
+    else:
+        order_obj=Order.objects.filter(user=request.user)
 
     context={'orders':order_obj}
     return render(request,'App_Shop/orders.html',context=context)
