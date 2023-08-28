@@ -22,7 +22,7 @@ cartBtn.forEach((btn) => {
     // const product_price = parseFloat(product.querySelector("span").innerText);
     const product_price = parseFloat(product.querySelector('span').innerText)
     // console.log(typeof(product_price));
-    const product_quantity = 1
+    const product_quantity = 5
     // console.log(product_img,product_name,product_price);
     const existingItem = cart.find((item) => {
       return item.product_id === product_id
@@ -125,12 +125,12 @@ const incrementQty = (e) => {
   // console.log(plusBtnParent);
   const productId = plusBtnParent.getAttribute('data-productid')
   const productDetails = cart.find((productItem) => {
-    return productItem.product_id === productId
+    return productItem.product_id === productId;
   })
-  const itemQty = plusBtnParent.querySelector('#item_qty')
-  const itemTotal = plusBtnParent.querySelector('#item_total')
-  productDetails.product_quantity += 1
-
+  const itemQty = plusBtnParent.querySelector('#item_qty');
+  console.log(itemQty);
+  const itemTotal = plusBtnParent.querySelector('#item_total');
+  productDetails.product_quantity =parseInt(productDetails.product_quantity)+1;
   itemQty.innerHTML = `<span style="color:red;cursor:pointer" class="minus btn" onclick="decrementQty(event)">-</span> <b>${productDetails.product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span>`
   itemTotal.innerHTML = `${productDetails.product_quantity
     } X <span class="price">${productDetails.product_price}=${productDetails.product_quantity * productDetails.product_price
@@ -149,8 +149,8 @@ const decrementQty = (e) => {
   const productDetails = cart.find((productItem) => {
     return productItem.product_id === productId
   })
-  console.log(productDetails.product_quantity)
-  if (productDetails.product_quantity > 1) {
+  
+  if (productDetails.product_quantity > 5) {
     const itemQty = plusBtnParent.querySelector('#item_qty')
     const itemTotal = plusBtnParent.querySelector('#item_total')
     productDetails.product_quantity -= 1
@@ -170,8 +170,7 @@ const decrementQty = (e) => {
 const removeItem = (e) => {
   const itemDetails = e.target.parentElement.parentElement;
   const itemId = itemDetails.getAttribute('data-productId');
-  console.log(itemId);
-  console.log(typeof (itemId));
+
 
   cart = cart.filter((item) => { return item.product_id !== itemId })
   localStorage.setItem('cart-items', JSON.stringify(cart));

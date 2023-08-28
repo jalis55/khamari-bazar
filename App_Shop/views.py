@@ -74,7 +74,7 @@ def shipping_process(request):
         response['Content-Type'] = 'application/json'  # Custom content type
     
         return response
-
+@login_required
 def all_orders(request):
     if request.user.is_staff:
         order_obj=Order.objects.all().order_by('-ordered_date')
@@ -83,7 +83,7 @@ def all_orders(request):
 
     context={'orders':order_obj}
     return render(request,'App_Shop/orders.html',context=context)
-
+@login_required
 def order_details(request,id):
     order=Order.objects.get(id=id)
     order_item_details=[]

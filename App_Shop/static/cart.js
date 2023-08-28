@@ -45,7 +45,7 @@ const addToCart = () => {
 const updateCartList=(e)=>{
     
     const itemQty=e.target.value;
-    if(itemQty>=1){
+    if(itemQty>=5){
         const itemDetails=e.target.parentElement.parentElement;
         const productId=itemDetails.getAttribute("data-productId");
         const item=cart.find(element=>element.product_id==productId);

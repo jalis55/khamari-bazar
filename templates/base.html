@@ -55,8 +55,8 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <a class="navbar-brand" href="{% url 'App_Shop:home' %}"><img src={% static "images/khamari_bazar_logo.png" %}
-                            class="logo" alt=""></a>
+                    <a class="navbar-brand" href="{% url 'App_Shop:home' %}"><img src={%
+                            static "images/khamari_bazar_logo.png" %} class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -71,13 +71,15 @@
                         <!-- <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li> -->
 
                         {% if not request.user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'App_Login:signin' %}"><span><i class="fa-regular fa-user"></i></span>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'App_Login:signin' %}"><span><i
+                                        class="fa-regular fa-user"></i></span>
                                 SIGN IN</a></li>
 
-                        
+
                         {% else %}
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><span><i class="fa-regular fa-user"></i></span>  {{request.user.profile.fullname}}</a>
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><span><i
+                                        class="fa-regular fa-user"></i></span> {{request.user.profile.fullname}}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'App_Shop:all_orders' %}">All Orders</a></li>
                                 <li><a href="#">My Account</a></li>
@@ -113,7 +115,8 @@
                     <ul class="cart-list">
                     </ul>
                 <li class="total">
-                    <a href="{% url 'App_Shop:cart' %}" style="color: white;" class="btn btn-default hvr-hover btn-cart">Checkout</a>
+                    <a href="{% url 'App_Shop:cart' %}" style="color: white;"
+                        class="btn btn-default hvr-hover btn-cart">Checkout</a>
                     <span class="float-right btn btn-primary">Total:<p id="total-price"></p></span>
                 </li>
                 <ul>
@@ -141,17 +144,17 @@
     <!-- End Top Search -->
 
 
-
-
-    <div class="alert alert-success" role="alert">
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                {% endfor %}
-        </ul>
-        {% endif %}
+    {% if messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        {{message}}
+        {% endfor %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+    {% endif %}
+
     {%block body_content %}
     {% endblock %}
 

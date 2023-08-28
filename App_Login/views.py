@@ -33,7 +33,7 @@ def signin(request):
             user=authenticate(username=username,password=password)
             if user is not None:
                 login(request, user)
-                # messages.success(request, f"Hello <b>{user}</b>! You have been logged in")
+                messages.success(request, f"Hello {user.profile.fullname}! You have been logged in")
                 next_url = request.GET.get('next', '/')  # Default to home page
                 return redirect(next_url)
 
