@@ -72,6 +72,20 @@ def shipping_process(request):
     
         return response
 
-        
+def all_orders(request):
+    order_obj=Order.objects.all().order_by('-ordered_date')
 
-        # return HttpResponse(shipping_data.get('phone'))
+    context={'orders':order_obj}
+    return render(request,'App_Shop/orders.html',context=context)
+
+def order_details(request,id):
+    order=Order.objects.get(id=id)
+    order_item_details=[]
+    for order_item in order.orderitem_set.all():
+        order_item_details.append({'item':order_item.item,'qty':order_item.quantity,'price':order_item.get_total_item_price()})
+    
+    context={
+        'order_details':order,
+        'item_details':order_item_details
+    }
+    return render(request,'App_Shop/order_details.html',context=context)

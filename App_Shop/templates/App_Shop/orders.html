@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body_content %}
+
+<!-- Start Cart  -->
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Order Date</th>
+                                <th>Total Price</th>
+                                <th>Order Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr data-orderId="1">
+                                <td class="thumbnail-img">
+                                    <a href="{% url 'App_Shop:order_details' id=order.id%}">
+                                        #ord{{order.id}}
+                                    </a>
+                                </td>
+                                <td class="name-pr">
+                                    <p>
+                                        {{order.ordered_date}}
+                                    </p>
+                                </td>
+                                <td class="price-pr">
+                                    <p>&#2547; {{order.get_total}}</p>
+                                </td>
+
+                                <td class="total-pr">
+                                    <p>{{order.order_status}}</p>
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- End Cart -->
+
+    {% endblock %}

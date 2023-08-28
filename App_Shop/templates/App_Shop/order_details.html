@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block body_content %}
+
+<!-- Start Cart  -->
+<div class="cart-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <div>
+                        address:
+                        {{order_details.shipping_address.address}}
+                        city:
+                        {{order_details.shipping_address.city}}
+                        zip code:
+                        {{order_details.shipping_address.zip_code}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <div>
+                        {% for item in item_details %}
+                        <hr>
+                        <p>{{item.item}}</p>
+                        <p>{{item.qty}}</p>
+                        <p>{{item.price}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- End Cart -->
+
+    {% endblock %}
