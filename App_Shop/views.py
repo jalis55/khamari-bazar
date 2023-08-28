@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from App_Login.decorators import custom_login_required
 from App_Shop.models import ProductCategory,Products,ShippingAddress,Order,OrderItem
 from App_Shop.forms import ShippingAddressForm
 from django.contrib import messages
@@ -29,10 +31,11 @@ def cart(request):
         }
     return render(request,'App_Shop/cart.html',context=context)
 
+@login_required
 def shipping(request):
     form=ShippingAddressForm()
     return render(request,'App_Shop/shipping.html',context={'form':form})
-
+@login_required
 def shipping_process(request):
     if request.method=='POST':
         shipping_data =json.loads(request.POST.get('shipping_address'))

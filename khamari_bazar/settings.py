@@ -150,5 +150,5 @@ PASSWORD_RESET_TIMEOUT = 14400
 # import socket
 # socket.getaddrinfo('localhost', 8080)
 
-LOGIN_URL="/"
+LOGIN_URL="accounts/signin"
 

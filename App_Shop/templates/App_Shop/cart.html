@@ -84,16 +84,9 @@
                 </div>
             </div>
            
-            {% if not request.user.is_anonymous %}
+            
             <div class="col-12 d-flex shopping-box"><a href="{% url 'App_Shop:shipping' %}" class="ml-auto btn hvr-hover">Orders</a>
             </div>
-            {% else %}
-            <p>login to place order</p>
-            <div class="col-12 d-flex shopping-box"><a href="" class="ml-auto btn hvr-hover"
-                    style="pointer-events: none"><strike>Order</strike> </a>
-                    
-            </div>
-            {% endif %}
 
 
 

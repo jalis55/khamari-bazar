@@ -1,7 +1,7 @@
 //cart page
 
 let cart = localStorage.getItem("cart-items") ? JSON.parse(localStorage.getItem('cart-items')) : []
-console.log(cart);
+
 
 
 const addToCart = () => {
