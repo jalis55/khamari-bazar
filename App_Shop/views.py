@@ -4,6 +4,7 @@ from App_Shop.models import ProductCategory,Products,ShippingAddress,Order,Order
 from App_Shop.forms import ShippingAddressForm
 from django.contrib import messages
 import json
+from django.http import JsonResponse
 # Create your views here.
 
 def home(request):
@@ -59,4 +60,18 @@ def shipping_process(request):
             order_item_obj=OrderItem(order=order_obj,item=product_obj,quantity=product['qty'])
             order_item_obj.save()
 
-        return HttpResponse(shipping_data.get('phone'))
+        order_details=order_obj.orderitem_set.all()
+        for order_item in order_details:
+            print(order_item.item)
+        data={
+            'message':"Success",
+            'orderId':order_obj.id,
+        }
+        response = JsonResponse(data, status=200)  # Custom status code
+        response['Content-Type'] = 'application/json'  # Custom content type
+    
+        return response
+
+        
+
+        # return HttpResponse(shipping_data.get('phone'))
