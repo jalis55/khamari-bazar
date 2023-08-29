@@ -182,8 +182,8 @@ const removeItem = (e) => {
 const cartNotification = () => {
   const notification = document.querySelector('.badge')
   const cartLen = cart.length
-  if (cartLen) {
-    notification.innerText = `(${cartLen})`;
+  if (cartLen!==0) {
+    notification.innerText = `${cartLen}`;
   }
 }
 
