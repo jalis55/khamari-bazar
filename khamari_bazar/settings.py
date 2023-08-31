@@ -154,6 +154,8 @@ EMAIL_PORT = 465 #This will be different based on your Host, for Namecheap I use
 EMAIL_FROM = 'tech@khamaribazarbd.com'
 EMAIL_HOST_USER = 'tech@khamaribazarbd.com' # Ex: info@pure.com
 EMAIL_HOST_PASSWORD ='2tZ01d-b^;QZ'
+DEFAULT_FROM_EMAIL='tech@khamaribazarbd.com'
+
 
 
 
