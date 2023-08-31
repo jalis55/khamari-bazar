@@ -138,13 +138,27 @@ MEDIA_URL="/media/"
 # EMAIL_USE_TLS = True
 
 #MY EMAIL SETTING
-EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  #Hosted on namecheap Ex: mail.pure.com
+# EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'  #Hosted on namecheap Ex: mail.pure.com
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587 #This will be different based on your Host, for Namecheap I use this`
+# EMAIL_FROM = 'jalismahamud2055@gmail.com'
+# EMAIL_HOST_USER = 'jalismahamud2055@gmail.com' # Ex: info@pure.com
+# EMAIL_HOST_PASSWORD ='drquxwygqrsgvhdj'
+
+# EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND='django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'mail.khamaribazarbd.com'  #Hosted on namecheap Ex: mail.pure.com
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587 #This will be different based on your Host, for Namecheap I use this`
-EMAIL_FROM = 'jalismahamud2055@gmail.com'
-EMAIL_HOST_USER = 'jalismahamud2055@gmail.com' # Ex: info@pure.com
-EMAIL_HOST_PASSWORD ='drquxwygqrsgvhdj'
+EMAIL_PORT = 465 #This will be different based on your Host, for Namecheap I use this`
+EMAIL_FROM = 'tech@khamaribazarbd.com'
+EMAIL_HOST_USER = 'tech@khamaribazarbd.com' # Ex: info@pure.com
+EMAIL_HOST_PASSWORD ='2tZ01d-b^;QZ'
+
+
+
+
+
 
 PASSWORD_RESET_TIMEOUT = 14400
 # import socket
