@@ -146,15 +146,15 @@ MEDIA_URL="/media/"
 # EMAIL_HOST_USER = 'jalismahamud2055@gmail.com' # Ex: info@pure.com
 # EMAIL_HOST_PASSWORD ='drquxwygqrsgvhdj'
 
-# EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_BACKEND='django_smtp_ssl.SSLEmailBackend'
-EMAIL_HOST = 'mail.khamaribazarbd.com'  #Hosted on namecheap Ex: mail.pure.com
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND='django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'smtp.mailersend.net'  #Hosted on namecheap Ex: mail.pure.com
 EMAIL_USE_TLS = True
-EMAIL_PORT = 465 #This will be different based on your Host, for Namecheap I use this`
-EMAIL_FROM = 'tech@khamaribazarbd.com'
-EMAIL_HOST_USER = 'tech@khamaribazarbd.com' # Ex: info@pure.com
-EMAIL_HOST_PASSWORD ='2tZ01d-b^;QZ'
-DEFAULT_FROM_EMAIL='tech@khamaribazarbd.com'
+EMAIL_PORT = 587 #This will be different based on your Host, for Namecheap I use this`
+EMAIL_FROM = 'varification@test-r6ke4n169pvgon12.mlsender.net'
+EMAIL_HOST_USER = 'MS_6GbOBH@test-r6ke4n169pvgon12.mlsender.net' # Ex: info@pure.com
+EMAIL_HOST_PASSWORD ='mssp.GIhARlN.3vz9dleprnp4kj50.VzlWolM'
+DEFAULT_FROM_EMAIL='varification@test-r6ke4n169pvgon12.mlsender.net'
 
 
 

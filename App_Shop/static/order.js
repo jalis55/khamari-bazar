@@ -54,18 +54,30 @@ else {
                 // No redirect here, as this is an AJAX request
                 form.remove();
                 const message = document.querySelector("#message");
-                message.innerHTML = `<div class="row justify-content-center shadow-lg  bg-white rounded "
-                style="width: 325px; margin: 0 auto; padding: 20px; border-radius: 5px; position: relative;">
-                <div class="circle-success-container" style="color: #82ce34; position: absolute; top: -31px;">
-                    <i class="fa-solid fa-circle-check fa-4x"></i>
-                </div>
-                <div class="success-message pt-4 h2">
-                    Success!
-                </div>
-                <div class="booking-message text-center pt-1" style="line-height: normal;">
-                    Your order has been placed. <br>Order id:#ord${response.orderId}.
-                </div>`
-                
+                message.innerHTML = `
+                            <div class="card border-0 shadow-lg text-center mx-auto" style="max-width: 400px; margin-top: 2rem;">
+                                <div class="card-body p-5 position-relative">
+                                    <div class="position-absolute top-0 start-50 translate-middle">
+                                        <div class="bg-white rounded-circle p-2 shadow-sm">
+                                            <i class="fas fa-check-circle text-success display-3"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-2">
+                                        <h3 class="fw-bold text-success mb-3">Success!</h3>
+                                        <p class="text-muted mb-0">
+                                            Your order has been placed.<br>
+                                            <span class="fw-semibold">Order ID: #ord${response.orderId}</span>
+                                        </p>
+                                    </div>
+                                    <div class="mt-4">
+                                        <a href="/" class="btn btn-success px-4">
+                                            <i class="fas fa-home me-2"></i>Continue Shopping
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+
                 // console.log(response.orderId);
             },
             error: function (xhr, status, error) {
