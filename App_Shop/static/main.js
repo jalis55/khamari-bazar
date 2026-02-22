@@ -179,6 +179,19 @@ const cartNotification = () => {
       notification.innerText = '';
     }
   }
+
+  const sidebarCheckoutBtn = document.querySelector('.total .btn-cart');
+  if (sidebarCheckoutBtn) {
+    if (cart.length === 0) {
+      sidebarCheckoutBtn.setAttribute("onclick", "alert('Your cart is empty! Please add some items.'); return false;");
+      sidebarCheckoutBtn.style.opacity = "0.5";
+      sidebarCheckoutBtn.style.cursor = "not-allowed";
+    } else {
+      sidebarCheckoutBtn.removeAttribute("onclick");
+      sidebarCheckoutBtn.style.opacity = "1";
+      sidebarCheckoutBtn.style.cursor = "pointer";
+    }
+  }
 }
 
 cart.forEach((item) => {
