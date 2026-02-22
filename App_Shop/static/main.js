@@ -32,12 +32,10 @@ cartBtn.forEach((btn) => {
       const cartLi = document.querySelector(`#pd${existingItem.product_id}`)
       const updateItemQty = cartLi.querySelector('#item_qty')
       const updateItemTotal = cartLi.querySelector('#item_total')
-      updateItemQty.innerHTML = `<p id='item_qty' style="font-size:1.5rem;"><span style="color:red;cursor:pointer" id="minus">-</span> ${existingItem.product_quantity} <span style="color:red;cursor:pointer" id="plus">+</span></p>`
+      updateItemQty.innerHTML = `<button class="btn btn-sm btn-outline-danger minus" onclick="decrementQty(event)">-</button> <b style="margin: 0 10px;">${existingItem.product_quantity}</b> <button class="btn btn-sm btn-outline-success plus" onclick="incrementQty(event)">+</button>`
       updateItemTotal.innerHTML = `${existingItem.product_quantity
-        } X <span class="price">${existingItem.product_price}=${existingItem.product_quantity * existingItem.product_price
-        }</span>
-        
-        `
+        } X <span class="price">${existingItem.product_price} = ${existingItem.product_quantity * existingItem.product_price
+        }</span>`
       getTotol()
     } else {
       cart.push({
@@ -93,9 +91,9 @@ const updatCartList = (
     liElement.innerHTML = `
         <a href="#" class="photo"><img src="${product_img}" class="cart-thumb" alt="" /></a>
         <h6><a href="#">${product_name}</a></h6>
-        <p id='item_qty' style="font-size:1.5rem;"><span style="color:red;cursor:pointer" class="minus" onclick="decrementQty(event)">-</span> <b>${product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span></p>
+        <p id='item_qty' style="font-size:1.5rem; display:flex; align-items:center;"><button class="btn btn-sm btn-outline-danger minus" onclick="decrementQty(event)">-</button> <b style="margin: 0 10px;">${product_quantity}</b> <button class="btn btn-sm btn-outline-success plus" onclick="incrementQty(event)">+</button></p>
         <div class="quantity-container" style="display:flex;justify-content:space-between;align-items:center;">
-        <p id='item_total'>${product_quantity} X <span class="price">${product_price}=${product_quantity * product_price
+        <p id='item_total'>${product_quantity} X <span class="price">${product_price} = ${product_quantity * product_price
       }</span></p>
         <button style="color:white;" class="btn btn-default hvr-hover btn-cart" onclick="removeItem(event)">Remove</button>
         </div>
@@ -130,13 +128,9 @@ const incrementQty = (e) => {
   const itemQty = plusBtnParent.querySelector('#item_qty');
   console.log(itemQty);
   const itemTotal = plusBtnParent.querySelector('#item_total');
-  productDetails.product_quantity =parseInt(productDetails.product_quantity)+1;
-  itemQty.innerHTML = `<span style="color:red;cursor:pointer" class="minus btn" onclick="decrementQty(event)">-</span> <b>${productDetails.product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span>`
-  itemTotal.innerHTML = `${productDetails.product_quantity
-    } X <span class="price">${productDetails.product_price}=${productDetails.product_quantity * productDetails.product_price
-    }</span>
-    
-    `
+  productDetails.product_quantity = parseInt(productDetails.product_quantity) + 1;
+  itemQty.innerHTML = `<button class="btn btn-sm btn-outline-danger minus" onclick="decrementQty(event)">-</button> <b style="margin: 0 10px;">${productDetails.product_quantity}</b> <button class="btn btn-sm btn-outline-success plus" onclick="incrementQty(event)">+</button>`
+  itemTotal.innerHTML = `${productDetails.product_quantity} X <span class="price">${productDetails.product_price} = ${productDetails.product_quantity * productDetails.product_price}</span>`
 
   localStorage.setItem('cart-items', JSON.stringify(cart))
   getTotol()
@@ -149,18 +143,14 @@ const decrementQty = (e) => {
   const productDetails = cart.find((productItem) => {
     return productItem.product_id === productId
   })
-  
+
   if (productDetails.product_quantity > 5) {
     const itemQty = plusBtnParent.querySelector('#item_qty')
     const itemTotal = plusBtnParent.querySelector('#item_total')
     productDetails.product_quantity -= 1
 
-    itemQty.innerHTML = `<span style="color:red;cursor:pointer" class="minus" onclick="decrementQty(event)">-</span> <b>${productDetails.product_quantity}</b> <span style="color:red;cursor:pointer" class="plus" onclick="incrementQty(event)">+</span>`
-    itemTotal.innerHTML = `${productDetails.product_quantity
-      } X <span class="price">${productDetails.product_price}=${productDetails.product_quantity * productDetails.product_price
-      }</span>
-      
-      `
+    itemQty.innerHTML = `<button class="btn btn-sm btn-outline-danger minus" onclick="decrementQty(event)">-</button> <b style="margin: 0 10px;">${productDetails.product_quantity}</b> <button class="btn btn-sm btn-outline-success plus" onclick="incrementQty(event)">+</button>`
+    itemTotal.innerHTML = `${productDetails.product_quantity} X <span class="price">${productDetails.product_price} = ${productDetails.product_quantity * productDetails.product_price}</span>`
 
     localStorage.setItem('cart-items', JSON.stringify(cart))
     getTotol()
@@ -181,9 +171,13 @@ const removeItem = (e) => {
 
 const cartNotification = () => {
   const notification = document.querySelector('.badge')
-  const cartLen = cart.length
-  if (cartLen!==0) {
-    notification.innerText = `${cartLen}`;
+  if (notification) {
+    const cartLen = cart.length
+    if (cartLen !== 0) {
+      notification.innerText = `${cartLen}`;
+    } else {
+      notification.innerText = '';
+    }
   }
 }
 
